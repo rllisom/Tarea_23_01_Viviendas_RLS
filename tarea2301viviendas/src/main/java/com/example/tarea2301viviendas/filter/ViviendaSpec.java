@@ -8,12 +8,14 @@ import org.springframework.data.jpa.domain.PredicateSpecification;
 public  interface ViviendaSpec {
     public static PredicateSpecification<Vivienda> filtrarPorCiudad(String ciudad){
         return ((from, criteriaBuilder) ->
+                ciudad == null? criteriaBuilder.and() :
                 criteriaBuilder.like(criteriaBuilder.lower(from.get("ciudad")),"%" +ciudad.toLowerCase() + "%" )
                 );
     }
 
     public static PredicateSpecification<Vivienda> filtrarPorProvincia(String provincia){
         return ((from, criteriaBuilder) ->
+                provincia == null? criteriaBuilder.and() :
                 criteriaBuilder.equal(criteriaBuilder.lower(from.get("provincia")),provincia.toLowerCase()));
     }
 
@@ -35,44 +37,52 @@ public  interface ViviendaSpec {
         };
     }
 
-    public static PredicateSpecification<Vivienda> filtrarPorNumHabitaciones(int habMin){
+    public static PredicateSpecification<Vivienda> filtrarPorNumHabitaciones(Integer habMin){
         return (from, criteriaBuilder) ->
+                habMin == null? criteriaBuilder.and() :
                 criteriaBuilder.greaterThanOrEqualTo(from.get("habitaciones"),habMin);
     }
 
-    public static PredicateSpecification<Vivienda> filtrarPorNumBanios(int banosMin){
+    public static PredicateSpecification<Vivienda> filtrarPorNumBanios(Integer banosMin){
         return (from, criteriaBuilder) ->
+                banosMin == null? criteriaBuilder.and() :
                 criteriaBuilder.greaterThanOrEqualTo(from.get("banos"),banosMin);
     }
     public static PredicateSpecification<Vivienda> filtrarPorTipo(TipoVivienda tipo){
         return ((from, criteriaBuilder) ->
+                tipo == null? criteriaBuilder.and() :
                 criteriaBuilder.equal(from.get("tipoVivienda"),tipo));
     }
 
     public static PredicateSpecification<Vivienda> filtrarPorEstado(EstadoVivienda estado){
         return ((from, criteriaBuilder) ->
+                estado == null ? criteriaBuilder.and() :
                 criteriaBuilder.equal(from.get("estado"),estado));
     }
 
-    public static  PredicateSpecification<Vivienda> filtrarPorAscensor(){
+    public static  PredicateSpecification<Vivienda> filtrarPorAscensor(Boolean ascensor){
         return (from, criteriaBuilder) ->
-                criteriaBuilder.isTrue(from.get("ascensor"));
+                ascensor == null? criteriaBuilder.and():
+                criteriaBuilder.equal(from.get("ascensor"),ascensor);
     }
 
-    public static  PredicateSpecification<Vivienda> filtrarPorTerraza(){
+    public static  PredicateSpecification<Vivienda> filtrarPorTerraza(Boolean terraza){
         return (from, criteriaBuilder) ->
-                criteriaBuilder.isTrue(from.get("terraza"));
+                terraza == null ? criteriaBuilder.and() :
+                criteriaBuilder.equal(from.get("terraza"),terraza);
     }
 
-    public static  PredicateSpecification<Vivienda> filtrarPorGaraje(){
+    public static  PredicateSpecification<Vivienda> filtrarPorGaraje(Boolean garaje){
         return (from, criteriaBuilder) ->
-                criteriaBuilder.isTrue(from.get("garaje"));
+                garaje == null ? criteriaBuilder.and() :
+                criteriaBuilder.equal(from.get("garaje"),garaje);
     }
 
-    public static  PredicateSpecification<Vivienda> filtrarPorDisponibilidad(boolean disponible){
-        return (from, criteriaBuilder) ->{
-                return criteriaBuilder.isTrue(from.get("disponible"));
-        };
+    public static  PredicateSpecification<Vivienda> filtrarPorDisponibilidad(Boolean disponible){
+        return (from, criteriaBuilder) ->
+                disponible == null ? criteriaBuilder.and() :
+                criteriaBuilder.equal(from.get("disponible"),disponible);
+
     }
 
 

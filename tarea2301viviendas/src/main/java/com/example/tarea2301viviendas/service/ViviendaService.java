@@ -28,9 +28,9 @@ public class ViviendaService {
                         ViviendaSpec.filtrarPorMetros(param.metrosMin(), param.metrosMax()),
                         ViviendaSpec.filtrarPorNumHabitaciones(param.habMin()),
                         ViviendaSpec.filtrarPorNumBanios(param.banosMin()),
-                        ViviendaSpec.filtrarPorAscensor(),
-                        ViviendaSpec.filtrarPorTerraza(),
-                        ViviendaSpec.filtrarPorGaraje(),
+                        ViviendaSpec.filtrarPorAscensor(param.ascensor()),
+                        ViviendaSpec.filtrarPorTerraza(param.terraza()),
+                        ViviendaSpec.filtrarPorGaraje(param.garaje()),
                         ViviendaSpec.filtrarPorDisponibilidad(param.disponible())
                 ), q -> q.page(pageable)
         );
