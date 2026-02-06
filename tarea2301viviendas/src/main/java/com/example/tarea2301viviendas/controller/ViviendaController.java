@@ -1,19 +1,20 @@
 package com.example.tarea2301viviendas.controller;
 
 import com.example.tarea2301viviendas.dto.ParametrosDto;
+import com.example.tarea2301viviendas.dto.ViviendaCreateRequest;
 import com.example.tarea2301viviendas.dto.ViviendaResponse;
 import com.example.tarea2301viviendas.model.EstadoVivienda;
 import com.example.tarea2301viviendas.model.TipoVivienda;
 import com.example.tarea2301viviendas.service.ViviendaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("api/v1/viviendas")
@@ -59,6 +60,11 @@ public class ViviendaController {
 
 
 
+    }
+
+    @PostMapping
+    public ResponseEntity<ViviendaResponse> create(@Valid @RequestBody ViviendaCreateRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(ViviendaResponse.of(viviendaService.create(request)));
     }
 
 

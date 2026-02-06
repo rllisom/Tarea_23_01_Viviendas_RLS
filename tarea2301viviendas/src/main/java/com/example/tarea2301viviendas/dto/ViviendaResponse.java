@@ -7,7 +7,7 @@ import com.example.tarea2301viviendas.model.Vivienda;
 import java.time.LocalDate;
 
 public record ViviendaResponse(
-        Long id, String titulo, String ciudad, String provincia, Double precio, Double metrosCuadrados,
+        Long id, String titulo, String ciudad, String provincia, Integer precio, Integer metrosCuadrados,
         int habitaciones, int banos, TipoVivienda tipoVivienda, EstadoVivienda estado, boolean disponibilidad,
         LocalDate fechaPublicacion
         ) {
@@ -22,7 +22,7 @@ public record ViviendaResponse(
                         v.getMetrosCuadrados(),
                         v.getHabitaciones(),
                         v.getBanos(),
-                        v.getTipoVivienda(),
+                        v.getTipo(),
                         v.getEstado(),
                         v.isDisponible(),
                         v.getFechaPublicacion()

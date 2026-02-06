@@ -22,8 +22,8 @@ public class Vivienda {
 
     @Column(nullable = false)
     private String titulo;
-    @Lob
-    private String description;
+
+    private String descripcion;
 
     @Column(nullable = false)
     private String ciudad;
@@ -32,10 +32,10 @@ public class Vivienda {
     private String provincia;
 
     @Column(nullable = false)
-    private double precio;
+    private int precio;
 
-    @Column(nullable = false)
-    private double metrosCuadrados;
+    @Column(nullable = false,name = "metros_cuadrados")
+    private int metrosCuadrados;
 
     @Column(nullable = false)
     private int habitaciones;
@@ -45,7 +45,7 @@ public class Vivienda {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoVivienda tipoVivienda;
+    private TipoVivienda tipo;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -63,7 +63,7 @@ public class Vivienda {
     @Column(nullable = false)
     private boolean disponible;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "fecha_publicacion")
     private LocalDate fechaPublicacion;
 
 

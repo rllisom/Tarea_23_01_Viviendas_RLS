@@ -1,6 +1,7 @@
 package com.example.tarea2301viviendas.service;
 
 import com.example.tarea2301viviendas.dto.ParametrosDto;
+import com.example.tarea2301viviendas.dto.ViviendaCreateRequest;
 import com.example.tarea2301viviendas.dto.ViviendaResponse;
 import com.example.tarea2301viviendas.filter.ViviendaSpec;
 import com.example.tarea2301viviendas.model.EstadoVivienda;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.PredicateSpecification;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Service
@@ -34,5 +37,26 @@ public class ViviendaService {
                         ViviendaSpec.filtrarPorDisponibilidad(param.disponible())
                 ), q -> q.page(pageable)
         );
+    }
+
+    public Vivienda create(ViviendaCreateRequest request){
+        Vivienda vivienda = Vivienda.builder()
+                .titulo(request.titulo())
+                .descripcion(request.descripcion())
+                .ciudad(request.ciudad())
+                .provincia(request.provincia())
+                .precio(request.precio())
+                .metrosCuadrados(request.metrosCuadrados())
+                .habitaciones(request.habitaciones())
+                .banos(request.banos())
+                .tipo(request.tipo())
+                .estado(request.estado())
+                .ascensor(request.ascensor())
+                .terraza(request.terraza())
+                .garaje(request.garaje())
+                .disponible(request.disponible())
+                .fechaPublicacion(LocalDate.now())
+                .build();
+        return viviendaRepository.save(vivienda);
     }
 }
